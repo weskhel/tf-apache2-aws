@@ -36,8 +36,9 @@ resource "aws_security_group" "web" {
 provisioner "remote-exec" {
   inline = [
     "sudo apt-get update",
-    "sudo apt-get install -y apache2",
-    "sudo systemctl start apache2"
+    "sudo apt-get install -y python3.2 apache2",
+    "sudo sed -i 's/#Port 22/Port 4022/g' /etc/ssh/sshd_config",
+    "sudo systemctl start apache2" 
   ]
 
   connection {
